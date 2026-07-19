@@ -1,10 +1,11 @@
-import { useState , useEffect} from 'react'
+import { useState , useEffect} from 'react';
 import Header from './components/Header';
 import AddTask from './components/AddTask';
 import TaskList from './components/TaskList';
 function App() {
-
+  const [theme, setTheme] = useState("light");
   const [tasks, setTasks] = useState(()=>{
+    
     const savedTasks = localStorage.getItem("tasks");
     
     if(savedTasks){
@@ -42,10 +43,22 @@ function App() {
 
   setTasks(updatedTasks);
   }
+  //dark & light mode
+  useEffect(() => {
+  document.documentElement.setAttribute("data-theme", theme);
+  }, [theme]);
 
+  function toggleTheme() {
+  setTheme((prevTheme) =>
+    prevTheme === "light" ? "dark" : "light"
+  );
+}
    return (
     <div >
-      <Header />
+      <Header
+        theme={theme}
+        toggleTheme={toggleTheme}
+      />
       <AddTask addTask={addTask} />
       <TaskList tasks={tasks}  deleteTask={deleteTask} toggleTask={toggleTask}/>
     </div>

@@ -7,10 +7,12 @@ function TaskItem({ task, deleteTask, toggleTask }) {
                 onChange={() => toggleTask(task.id)}
                 className="checkbox checkbox-warning"
             />
-            <span className={task.completed ? "completed" : ""}>
+            <span className={
+                task.completed ?"line-through text-gray-400 "
+                : "" }>
                 {task.text}
             </span>
-            <button  class="btn  w-25 h-7 btn-error"  onClick={() => deleteTask(task.id)}>Delete</button>
+            <button  className="btn  w-25 h-7 btn-error"  onClick={() => deleteTask(task.id)}>Delete</button>
         </li>
     )
 }
